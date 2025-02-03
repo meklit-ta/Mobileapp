@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".ContactSettingsActivity">
 
-    <!-- Sort Contacts By -->
+
     <TextView
         android:id="@+id/textSortBy"
         android:layout_width="wrap_content"
