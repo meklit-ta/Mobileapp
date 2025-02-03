@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
-    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
     <color name="navbar_background">#1a1a48</color>
     <color name="toolbar_background">#bebebe</color>
     <color name="dialogue_button_color">#26C6DA</color>
