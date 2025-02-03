@@ -19,7 +19,7 @@
         app:layout_constraintMarginStart="16dp"
         app:layout_constraintMarginTop="16dp"/>
 
-    <!-- First RadioGroup -->
+
     <RadioGroup
         android:id="@+id/radioGroupSortBy"
         android:layout_width="wrap_content"
