@@ -18,7 +18,7 @@ public class ContactListActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_contact_list);  // Ensure this matches your XML file name
 
-            // Initialize UI elements
+
             textViewContacts = findViewById(R.id.textViewContacts);
 
             // Debug: Check if TextView is null
