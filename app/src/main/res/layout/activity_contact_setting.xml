@@ -1,10 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ContactSettingActivity">
+    tools:context=".ContactSettingsActivity">
+
+    <!-- Sort Contacts By -->
+    <TextView
+        android:id="@+id/textSortBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sort Contacts By:"
+        android:textSize="16sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintMarginStart="16dp"
+        app:layout_constraintMarginTop="16dp"/>
+
+    <!-- First RadioGroup -->
+    <RadioGroup
+        android:id="@+id/radioGroupSortBy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textSortBy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintMarginTop="8dp">
+
+        <RadioButton
+            android:id="@+id/radioName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Name" />
+
+        <RadioButton
+            android:id="@+id/radioCity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="City" />
+
+        <RadioButton
+            android:id="@+id/radioBirthday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Birthday" />
+    </RadioGroup>
+
+    <!-- Sort Order -->
+    <TextView
+        android:id="@+id/textSortOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sort Order:"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/radioGroupSortBy"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintMarginTop="16dp"/>
+
+    <!-- Second RadioGroup -->
+    <RadioGroup
+        android:id="@+id/radioGroupSortOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textSortOrder"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintMarginTop="8dp">
+
+        <RadioButton
+            android:id="@+id/radioAscending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ascending" />
+
+        <RadioButton
+            android:id="@+id/radioDescending"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descending" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
