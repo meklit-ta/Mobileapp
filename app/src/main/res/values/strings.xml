@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MyProject</string>
+    <string name="save">SAVE</string>
+    <string name="change">Change</string>
+    <string name="birthday">Birthday:</string>
+</resources>
