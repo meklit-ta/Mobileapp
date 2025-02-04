@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void openSettings() {
-        Intent intent = new Intent(MainActivity.this, ContactSettingActivity.class);
+        Intent intent = new Intent(MainActivity.this, ContactSettingsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
