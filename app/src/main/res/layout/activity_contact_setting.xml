@@ -9,19 +9,18 @@
     android:background="@android:color/white"
     tools:context=".ContactSettingsActivity">
 
-    <!-- Sort Contacts By -->
+    <!-- Title for Sorting Settings -->
     <TextView
         android:id="@+id/textSortBy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sort Contacts By:"
+        android:textColor="@android:color/black"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintMarginTop="16dp"
-        app:layout_constraintMarginStart="16dp"/>
+         />
 
     <!-- RadioGroup for Sorting Criteria -->
     <RadioGroup
@@ -30,7 +29,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/textSortBy"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintMarginTop="8dp">
+        >
 
         <RadioButton
             android:id="@+id/radioName"
@@ -51,7 +50,7 @@
             android:text="Birthday"/>
     </RadioGroup>
 
-    <!-- Sort Order -->
+    <!-- Title for Sorting Order -->
     <TextView
         android:id="@+id/textSortOrder"
         android:layout_width="wrap_content"
@@ -62,7 +61,7 @@
         android:textColor="@android:color/black"
         app:layout_constraintTop_toBottomOf="@id/radioGroupSortBy"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintMarginTop="16dp"/>
+         />
 
     <!-- RadioGroup for Sorting Order -->
     <RadioGroup
@@ -71,7 +70,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/textSortOrder"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintMarginTop="8dp">
+        >
 
         <RadioButton
             android:id="@+id/radioAscending"
@@ -91,11 +90,11 @@
         android:id="@+id/buttonSaveSettings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save Settings"
         android:padding="12dp"
+        android:text="Save Settings"
         app:layout_constraintTop_toBottomOf="@id/radioGroupSortOrder"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintMarginTop="20dp"/>
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
