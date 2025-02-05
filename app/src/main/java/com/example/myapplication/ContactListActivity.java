@@ -32,7 +32,7 @@ public class ContactListActivity extends AppCompatActivity {
             String sortOrder = sharedPreferences.getString("sortOrder", "Ascending");
 
             // Load contacts (Replace this with real contact data)
-            contactList = getContacts();
+
 
             // Apply sorting based on preferences
             sortContacts(sortBy, sortOrder);
@@ -42,13 +42,7 @@ public class ContactListActivity extends AppCompatActivity {
         }
 
         // Example function to retrieve contacts (Replace with actual database/API call)
-        private List<String> getContacts() {
-            List<String> contacts = new ArrayList<>();
-            contacts.add("Alice - City: New York");
-            contacts.add("Bob - City: Milan");
-            contacts.add("Charlie - City: Rome");
-            return contacts;
-        }
+
 
         // Sort contacts based on preferences
         private void sortContacts(String sortBy, String sortOrder) {
