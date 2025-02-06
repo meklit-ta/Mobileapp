@@ -266,7 +266,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/editEmail" />
 
             <Button
-
                 android:id="@+id/btnBirthday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -275,11 +274,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBaseline_toBaselineOf="@id/textBday"/>
 
-
-
-
-
-
+            <TextView
+                android:id="@+id/textDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="24dp"
+                android:text="01/01/1970"
+                app:layout_constraintStart_toEndOf="@id/textBday"
+                app:layout_constraintTop_toBottomOf="@+id/editEmail" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

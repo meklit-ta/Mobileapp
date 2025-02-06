@@ -16,28 +16,26 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/imageButtonList"
+            android:id="@+id/imageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:contentDescription="@string/a_button_that_shows_contact_list"
-            app:srcCompat="@drawable/contactlisticon" />
+            android:src="@drawable/contactlisticon" />
 
         <ImageButton
-            android:id="@+id/imageButtonMap"
+            android:id="@+id/imageButton2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:contentDescription="@string/an_image_that_shows_a_map"
-            app:srcCompat="@drawable/mapicon" />
+            android:src="@drawable/mapicon" />
 
         <ImageButton
-            android:id="@+id/imageButtonSettings"
+            android:id="@+id/imageButtonSetting"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:contentDescription="@string/an_image_that_shows_settings"
-            app:srcCompat="@drawable/settingsicon" />
+            android:src="@drawable/settingsicon" />
+
     </LinearLayout>
 
     <TextView
