@@ -1,122 +1,130 @@
 package com.example.myapplication;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 public class ContactSettingsActivity extends AppCompatActivity {
 
+    private ImageButton btnMap, btnContacts, btnSettings;
+    private RadioGroup radioGroupSortBy, RadioGroupSortOrder;
+    private RadioButton radioName, radioCity, radioBirthday, radioAscending, radioDescending;
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_contact_setting);  // ✅ Ensure this file exists
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_contact_settings);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.btnSettings), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+        btnMap = findViewById(R.id.btnMap);
+        btnContacts = findViewById(R.id.btnContacts);
+        btnSettings = findViewById(R.id.btnSettings);
 
-        initListButton();
-        initMapButton();
-        initSettingsButton();
+        // Set click listeners
+        btnMap.setOnClickListener(v -> openMap());
+        btnContacts.setOnClickListener(v -> openContacts());
+        btnSettings.setOnClickListener(v -> openSettings());
         initSettings();
-        initSortByClick();
         initSortOrderClick();
+        initSortByClick();
+    }
+    private void openContacts() {
+        Intent intent = new Intent(ContactSettingsActivity.this, ContactListActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
-    private void initListButton() {
-        ImageButton ibList = findViewById(R.id.imageButtonList);
-        if (ibList != null) {  // ✅ Prevent NullPointerException
-            ibList.setOnClickListener(v -> {
-                Intent intent = new Intent(ContactSettingsActivity.this, ContactListActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            });
-        } else {
-            Log.e("ContactSettingsActivity", "Error: imageButtonList is null! Check XML.");
-        }
+    private void openMap() {
+        Intent intent = new Intent(ContactSettingsActivity.this, ContactMapsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
     }
 
-    private void initMapButton() {
-        ImageButton ibMap = findViewById(R.id.imageButtonMap);
-        if (ibMap != null) {
-            ibMap.setOnClickListener(v -> {
-                Intent intent = new Intent(ContactSettingsActivity.this, ContactMapsActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            });
-        } else {
-            Log.e("ContactSettingsActivity", "Error: imageButtonMap is null! Check XML.");
-        }
+    private void openSettings() {
+        ImageButton ibSettings = findViewById(R.id.btnSettings);
+        ibSettings.setEnabled(false);
+
     }
 
-    private void initSettingsButton() {
-        ImageButton ibSettings = findViewById(R.id.imageButtonSettings);
-        if (ibSettings != null) {
-            ibSettings.setEnabled(false);
-        }
-    }
+    private void initSettings(){
+        String sortBy = getSharedPreferences("MyContactListPreferences", Context.MODE_PRIVATE).getString("sortfield","contactname");
+        String sortOrder = getSharedPreferences("MyContactListPreferences", Context.MODE_PRIVATE).getString("sortorder","ASC");
 
-    private void initSettings() {
-        String sortBy = getSharedPreferences("MyContactListPrefrences", Context.MODE_PRIVATE)
-                .getString("sortfield", "contactname");
-        String sortOrder = getSharedPreferences("MyContactListPrefrences", Context.MODE_PRIVATE)
-                .getString("sortorder", "ASC");
 
-        RadioButton rbName = findViewById(R.id.radioName);
-        RadioButton rbCity = findViewById(R.id.radioCity);
-        RadioButton rbBirthday = findViewById(R.id.radioBirthday);
+        RadioButton radioName = findViewById(R.id.radioName);
+        RadioButton radioCity = findViewById(R.id.radioCity);
+        RadioButton radioBirthday = findViewById(R.id.radioBirthday);
 
-        if (sortBy.equalsIgnoreCase("contactname")) {
-            rbName.setChecked(true);
+        if (sortBy.equalsIgnoreCase("contactname")){
+            radioName.setChecked(true);
         } else if (sortBy.equalsIgnoreCase("city")) {
-            rbCity.setChecked(true);
+            radioCity.setChecked(true);
         } else {
-            rbBirthday.setChecked(true);
+            radioBirthday.setChecked(true);
         }
+        RadioButton radioAscending = findViewById(R.id.radioAscending);
+        RadioButton radioDescending = findViewById(R.id.radioDescending);
 
-        RadioButton rbAscending = findViewById(R.id.radioAscending);
-        RadioButton rbDescending = findViewById(R.id.radioDescending);
-
-        if (sortOrder.equalsIgnoreCase("ASC")) {  // ✅ Corrected condition
-            rbAscending.setChecked(true);
+        if (sortOrder.equalsIgnoreCase("ASC")){
+            radioAscending.setChecked(true);
         } else {
-            rbDescending.setChecked(true);
+            radioDescending.setChecked(true);
         }
     }
 
-    private void initSortByClick() {
-        RadioGroup rgSortBy = findViewById(R.id.radioGroupSortBy);
-        rgSortBy.setOnCheckedChangeListener((group, checkedId) -> {
-            RadioButton rbName = findViewById(R.id.radioName);
-            RadioButton rbCity = findViewById(R.id.radioCity);
+    private void  initSortByClick(){
+        RadioGroup radioGroupSortBy =findViewById(R.id.radioGroupSortBy);
+        radioGroupSortBy.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                RadioButton radioName = findViewById(R.id.radioName);
+                RadioButton radioCity = findViewById(R.id.radioCity);
 
-            if (rbName.isChecked()) {
-                getSharedPreferences("MyContactListPrefrences", Context.MODE_PRIVATE)
-                        .edit().putString("sortfield", "contactname").apply();
-            } else if (rbCity.isChecked()) {
-                getSharedPreferences("MyContactListPrefrences", Context.MODE_PRIVATE)
-                        .edit().putString("sortfield", "city").apply();
-            } else {
-                getSharedPreferences("MyContactListPrefrences", Context.MODE_PRIVATE)
-                        .edit().putString("sortfield", "birthday").apply();
+                if (radioName.isChecked()){
+                    getSharedPreferences("MyContactListPreferences", Context.MODE_PRIVATE).edit().putString("sortfield", "contactname").apply();
+                } else if (radioCity.isChecked()) {
+                    getSharedPreferences("MyContactListPreferences", Context.MODE_PRIVATE).edit().putString("sortfield", "city").apply();
+                } else {
+                    getSharedPreferences("MyContactListPreferences", Context.MODE_PRIVATE).edit().putString("sortfield", "birthday").apply();
+
+                }
+
             }
         });
     }
 
-    private void initSortOrderClick() {
-        RadioGroup rgSortOrder = findViewById(R.id.radioGroupSortOrder);
-        rgSortOrder.setOnCheckedChangeListener((group, checkedId) -> {
-            RadioButton rbAscending = findViewById(R.id.radioAscending);
-            if (rbAscending.isChecked()) {
-                getSharedPreferences("MyContactListPrefrences", Context.MODE_PRIVATE)
-                        .edit().putString("sortorder", "ASC").apply();
-            } else {
-                getSharedPreferences("MyContactListPrefrences", Context.MODE_PRIVATE)
-                        .edit().putString("sortorder", "DESC").apply();
+    private void  initSortOrderClick(){
+        RadioGroup radioGroupSortOrder =findViewById(R.id.RadioGroupSortOrder);
+        radioGroupSortOrder.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                RadioButton radioAscending = findViewById(R.id.radioAscending);
+                RadioButton radioDescending = findViewById(R.id.radioDescending);
+
+                if (radioAscending.isChecked()){
+                    getSharedPreferences("MyContactListPreferences", Context.MODE_PRIVATE).edit().putString("sortorder", "ASC").apply();
+                } else {
+                    getSharedPreferences("MyContactListPreferences", Context.MODE_PRIVATE).edit().putString("sortorder", "DESC").apply();
+
+                }
+
             }
         });
     }
+
 }
