@@ -172,7 +172,7 @@ public class ContactListActivity extends AppCompatActivity {
     }
 
     private void openMap() {
-        Intent intent = new Intent(ContactListActivity.this, ContactMapActivity.class);
+        Intent intent = new Intent(ContactListActivity.this, ContactMapsActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
