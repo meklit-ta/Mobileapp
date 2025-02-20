@@ -31,7 +31,6 @@ public class ContactDataSource {
         boolean didSucceed = false;
         try {
             ContentValues initialValues = new ContentValues();
-
             initialValues.put("contactname", c.getContactName());
             initialValues.put("streetaddress", c.getStreetAddress());
             initialValues.put("city", c.getCity());
@@ -40,10 +39,15 @@ public class ContactDataSource {
             initialValues.put("phonenumber", c.getPhoneNumber());
             initialValues.put("cellnumber", c.getCellNumber());
             initialValues.put("email", c.geteMail());
-            initialValues.put("birthday", String.valueOf(c.getBirthday().getTimeInMillis()));
+
+            // ✅ Handle possible null Birthday
+            if (c.getBirthday() != null) {
+                initialValues.put("birthday", String.valueOf(c.getBirthday().getTimeInMillis()));
+            } else {
+                initialValues.put("birthday", "0"); // Store 0 if no birthday is set
+            }
 
             didSucceed = database.insert("contact", null, initialValues) > 0;
-
             if (didSucceed) {
                 Log.d("DB_INSERT", "Contact saved successfully: " + c.getContactName());
             } else {
@@ -69,7 +73,13 @@ public class ContactDataSource {
             updateValues.put("phonenumber", c.getPhoneNumber());
             updateValues.put("cellnumber", c.getCellNumber());
             updateValues.put("email", c.geteMail());
-            updateValues.put("birthday", String.valueOf(c.getBirthday().getTimeInMillis()));
+
+            // ✅ Handle possible null Birthday
+            if (c.getBirthday() != null) {
+                updateValues.put("birthday", String.valueOf(c.getBirthday().getTimeInMillis()));
+            } else {
+                updateValues.put("birthday", "0");
+            }
 
             didSucceed = database.update("contact", updateValues, "_id=?", new String[]{String.valueOf(rowId)}) > 0;
 
@@ -90,11 +100,12 @@ public class ContactDataSource {
             String query = "SELECT MAX(_id) FROM contact";
             Cursor cursor = database.rawQuery(query, null);
 
-            if (cursor != null && cursor.moveToFirst()) { // ✅ Ensure data is retrieved
-                lastId = cursor.getInt(0);
+            if (cursor != null && cursor.moveToFirst()) {
+                if (!cursor.isNull(0)) { // ✅ Fix for empty table case
+                    lastId = cursor.getInt(0);
+                }
             }
-
-            cursor.close();
+            if (cursor != null) cursor.close();
         } catch (Exception e) {
             Log.e("DB_ERROR", "Error retrieving last contact ID: " + e.getMessage());
         }
@@ -120,20 +131,80 @@ public class ContactDataSource {
                     contact.setCelllNumber(cursor.getString(7));
                     contact.seteMail(cursor.getString(8));
 
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTimeInMillis(Long.parseLong(cursor.getString(9)));
-                    contact.setBirthday(calendar);
+
+                    long birthdayMillis = cursor.getLong(9);
+                    if (birthdayMillis > 0) {
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTimeInMillis(birthdayMillis);
+                        contact.setBirthday(calendar);
+                    } else {
+                        contact.setBirthday(null);
+                    }
 
                     contactList.add(contact);
                 } while (cursor.moveToNext());
             }
 
-            cursor.close();
+            if (cursor != null) cursor.close();
             Log.d("DB_FETCH", "Contacts retrieved successfully: " + contactList.size());
         } catch (Exception e) {
             Log.e("DB_ERROR", "Error retrieving contacts: " + e.getMessage());
         }
 
         return contactList;
+    }
+
+
+    public Contact getContactById(int contactID) {
+        Contact contact = null;
+        try {
+            String query = "SELECT * FROM contact WHERE _id=?";
+            Cursor cursor = database.rawQuery(query, new String[]{String.valueOf(contactID)});
+
+            if (cursor != null && cursor.moveToFirst()) {
+                contact = new Contact();
+                contact.setContactID(cursor.getInt(0));
+                contact.setContactName(cursor.getString(1));
+                contact.setStreetAddress(cursor.getString(2));
+                contact.setCity(cursor.getString(3));
+                contact.setState(cursor.getString(4));
+                contact.setZipCode(cursor.getString(5));
+                contact.setPhoneNumber(cursor.getString(6));
+                contact.setCelllNumber(cursor.getString(7));
+                contact.seteMail(cursor.getString(8));
+
+
+                long birthdayMillis = cursor.getLong(9);
+                if (birthdayMillis > 0) {
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTimeInMillis(birthdayMillis);
+                    contact.setBirthday(calendar);
+                } else {
+                    contact.setBirthday(null);
+                }
+            }
+
+            if (cursor != null) cursor.close();
+        } catch (Exception e) {
+            Log.e("DB_ERROR", "Error retrieving contact by ID: " + e.getMessage());
+        }
+
+        return contact;
+    }
+
+
+    public boolean deleteContact(int contactID) {
+        boolean didSucceed = false;
+        try {
+            didSucceed = database.delete("contact", "_id = ?", new String[]{String.valueOf(contactID)}) > 0;
+            if (didSucceed) {
+                Log.d("DB_DELETE", "Contact deleted successfully with ID: " + contactID);
+            } else {
+                Log.e("DB_DELETE", "Failed to delete contact.");
+            }
+        } catch (Exception e) {
+            Log.e("DB_ERROR", "Error deleting contact: " + e.getMessage());
+        }
+        return didSucceed;
     }
 }

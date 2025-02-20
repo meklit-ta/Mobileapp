@@ -59,7 +59,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginRight="32dp"
             android:layout_weight="1"
-            android:text="@string/togglebutton" />
+            android:text="togglebutton" />
 
         <Button
             android:id="@+id/buttonSave"
@@ -68,7 +68,7 @@
             android:layout_marginLeft="32dp"
             android:layout_marginRight="16dp"
             android:layout_weight="1"
-            android:text="@string/save" />
+            android:text="Save" />
     </LinearLayout>
 
     <ScrollView
@@ -103,11 +103,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:ems="14"
-                android:inputType="textPersonName"
                 android:hint="Name"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textContact"
-                android:imeOptions="actionNext"/>
+                app:layout_constraintTop_toBottomOf="@+id/textContact" />
 
             <requestFocus/>
             <TextView
@@ -127,11 +128,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:ems="14"
-                android:inputType="textPersonName"
                 android:hint="Address"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textAddress"
-                android:imeOptions="actionNext"/>
+                app:layout_constraintTop_toBottomOf="@+id/textAddress" />
 
 
             <EditText
@@ -141,11 +143,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:ems="9"
-                android:inputType="textPersonName"
                 android:hint="City"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:minHeight="48dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editAddress"
-                android:imeOptions="actionNext"/>
+                app:layout_constraintTop_toBottomOf="@+id/editAddress" />
 
             <EditText
                 android:id="@+id/editState"
@@ -158,6 +161,7 @@
                 android:imeOptions="actionNext"
                 android:inputType="textCapCharacters"
                 android:maxLength="2"
+                android:minHeight="48dp"
                 app:layout_constraintStart_toEndOf="@id/editCity"
                 app:layout_constraintTop_toBottomOf="@+id/editAddress" />
 
@@ -172,6 +176,7 @@
                 android:imeOptions="actionNext"
                 android:inputType="textCapCharacters"
                 android:maxLength="5"
+                android:minHeight="48dp"
                 app:layout_constraintStart_toEndOf="@id/editState"
                 app:layout_constraintTop_toBottomOf="@+id/editAddress" />
 
@@ -195,6 +200,7 @@
                 android:imeOptions="actionNext"
                 android:inputType="textCapCharacters"
                 android:maxLength="5"
+                android:minHeight="48dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -217,8 +223,9 @@
                 android:ems="8"
                 android:imeOptions="actionNext"
                 android:inputType="phone"
-                android:nextFocusDown="@id/editEmail"
                 android:maxLength="14"
+                android:minHeight="48dp"
+                android:nextFocusDown="@id/editEmail"
                 app:layout_constraintStart_toStartOf="@id/textCell"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -242,6 +249,7 @@
                 android:imeOptions="actionNext"
                 android:inputType="textEmailAddress"
                 android:maxLength="14"
+                android:minHeight="48dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@id/textEmail" />
 
@@ -282,7 +290,8 @@
                 android:layout_marginTop="24dp"
                 android:text="01/01/1970"
                 app:layout_constraintStart_toEndOf="@id/textBday"
-                app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+                app:layout_constraintTop_toBottomOf="@+id/editEmail"
+                tools:ignore="DuplicateIds" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

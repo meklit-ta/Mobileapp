@@ -9,8 +9,8 @@
     <string name="an_image_that_shows_settings">Settings</string>
 
     <!-- Toolbar Buttons -->
-    <string name="togglebutton">Edit Mode</string>
-    <string name="save">Save</string>
+    <string name="toggle_delete">Delete Mode</string>
+    <string name="new_contact">NEW</string>
 
     <!-- Contact Form Labels -->
     <string name="contact">Contact:</string>
@@ -38,5 +38,4 @@
 
     <!-- Button Labels -->
     <string name="change">Change</string>
-
 </resources>
