@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="navbar_background">#008577</color> <!-- Dark Teal -->
-    <color name="toolbar_background">#00574B</color> <!-- Dark Greenish -->
-    <color name="system_blue">#1976D2</color> <!-- Blue Color -->
-    <color name="system_red">#D32F2F</color> <!-- Red for DELETE -->
-    <color name="system_transparent">#00000000</color> <!-- Fully Transparent -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="navbar_background">#1a1a48</color>
+    <color name="toolbar_background">#bebebe</color>
+    <color name="dialogue_button_color">#26C6DA</color>
+    <color name="system_red">#ff0000</color>
+    <color name="system_transparent">#00000000</color>
+    <color name="system_blue">#0000ff</color>
+
 </resources>

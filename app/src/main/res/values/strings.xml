@@ -1,41 +1,17 @@
-<?xml version="1.0" encoding="utf-8"?>
+
 <resources>
-    <!-- App Name -->
-    <string name="app_name">MyApplication</string>
-
-    <!-- Navigation Buttons -->
-    <string name="a_button_that_shows_contact_list">Contact List</string>
-    <string name="an_image_that_shows_a_map">Map</string>
-    <string name="an_image_that_shows_settings">Settings</string>
-
-    <!-- Toolbar Buttons -->
-    <string name="toggle_delete">Delete Mode</string>
-    <string name="new_contact">NEW</string>
-
-    <!-- Contact Form Labels -->
-    <string name="contact">Contact:</string>
-    <string name="address">Address:</string>
-    <string name="city">City:</string>
-    <string name="state">State:</string>
-    <string name="zipcode">Zipcode:</string>
-    <string name="home_phone">Home Phone:</string>
-    <string name="phone_number">Phone No:</string>
-    <string name="email_address">Email Address:</string>
-    <string name="birthday">Birthday:</string>
-
-    <!-- Input Hints -->
-    <string name="hint_name">Name</string>
-    <string name="hint_address">Address</string>
-    <string name="hint_city">City</string>
-    <string name="hint_state">State</string>
-    <string name="hint_zipcode">Zipcode</string>
-    <string name="hint_home_phone">Home Phone</string>
-    <string name="hint_phone_number">Phone Number</string>
-    <string name="hint_email">Email Address</string>
-
-    <!-- Default Date -->
-    <string name="default_date">01/01/1970</string>
-
-    <!-- Button Labels -->
+    <string name="app_name">MyProject</string>
+    <string name="a_button_to_display_a_list_of_contacts">Button to display a list of contacts</string>
+    <string name="a_button_to_display_a_map_of_contact_s_address">Button to display a map of contact\'s address</string>
+    <string name="a_button_to_display_settings_for_contacts">Button to display settings for contacts</string>
+    <string name="save">SAVE</string>
+    <string name="off">OFF</string>
     <string name="change">Change</string>
+    <string name="_01_01_1970">01/01/1970</string>
+    <string name="birthday">Birthday:</string>
+    <string name="email_address">Email Address:</string>
+    <string name="cell_phone">Cell Phone:</string>
+    <string name="home_phone">Home Phone:</string>
+    <string name="zipcode">Zipcode</string>
+    <string name="state">State</string>
 </resources>

@@ -1,86 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="@android:color/white"
+    android:fitsSystemWindows="true">
+    <!-- Toolbar with Toggle & Save Button -->
+
+    <!-- Contact Information Fields -->
 
     <LinearLayout
-        android:id="@+id/linearLayout3"
-        android:layout_width="409dp"
+        android:id="@+id/bottomNavigationBar"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/navbar_background"
+        android:background="@android:color/black"
         android:orientation="horizontal"
+        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/imageButtonList"
-            android:layout_width="wrap_content"
+            android:id="@+id/btnContacts"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:contentDescription="@string/a_button_that_shows_contact_list"
-            app:srcCompat="@drawable/contactlisticon" />
+            android:background="@android:color/white"
+            android:src="@drawable/contactlisticon" />
 
         <ImageButton
-            android:id="@+id/imageButtonMap"
-            android:layout_width="wrap_content"
+            android:id="@+id/btnMap"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:contentDescription="@string/an_image_that_shows_a_map"
-            app:srcCompat="@drawable/mapicon" />
+            android:background="@android:color/white"
+            android:src="@drawable/mapicon" />
 
         <ImageButton
-            android:id="@+id/imageButtonSettings"
-            android:layout_width="wrap_content"
+            android:id="@+id/btnSettings"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:contentDescription="@string/an_image_that_shows_settings"
-            app:srcCompat="@drawable/settingsicon" />
+            android:background="@android:color/white"
+            android:src="@drawable/settingsicon" />
+
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/linearLayout2"
+        android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/toolbar_background"
+        android:background="@android:color/darker_gray"
+        android:paddingTop="?attr/actionBarSize"
         android:orientation="horizontal"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="8dp"
+        android:gravity="center_vertical"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ToggleButton
-            android:id="@+id/toggleButtonEdit"
-            android:layout_width="wrap_content"
+            android:id="@+id/toggleEdit"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginRight="32dp"
             android:layout_weight="1"
-            android:text="togglebutton" />
+            android:checked="false"
+            android:textOn="ON"
+            android:textOff="OFF" />
 
         <Button
-            android:id="@+id/buttonSave"
-            android:layout_width="wrap_content"
+            android:id="@+id/btnSave"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="16dp"
             android:layout_weight="1"
-            android:text="Save" />
+            android:text="SAVE" />
     </LinearLayout>
 
     <ScrollView
-        android:id="@+id/scrollView"
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationBar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+        app:layout_constraintEnd_toEndOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -90,210 +97,222 @@
                 android:id="@+id/textContact"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
                 android:text="Contact:"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.009"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.031" />
 
-            <EditText
-                android:id="@+id/editName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:ems="14"
-                android:hint="Name"
-                android:imeOptions="actionNext"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textContact" />
-
-            <requestFocus/>
             <TextView
                 android:id="@+id/textAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="Address:"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.009"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editName" />
+                app:layout_constraintTop_toBottomOf="@+id/editContact"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <requestFocus
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteX="8dp" />
+
+            <EditText
+                android:id="@+id/editContact"
+                android:layout_width="328dp"
+                android:layout_height="48dp"
+                android:hint="Enter Name"
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.058"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textContact"
+                app:layout_constraintVertical_bias="0.025" />
 
             <EditText
                 android:id="@+id/editAddress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:ems="14"
-                android:hint="Address"
-                android:imeOptions="actionNext"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
+                android:layout_width="329dp"
+                android:layout_height="48dp"
+                android:hint="Enter Street Address"
+                android:inputType="textPostalAddress"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.06"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textAddress" />
-
+                app:layout_constraintTop_toBottomOf="@+id/textAddress"
+                app:layout_constraintVertical_bias="0.028" />
 
             <EditText
                 android:id="@+id/editCity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:ems="9"
+                android:layout_width="190dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
                 android:hint="City"
-                android:imeOptions="actionNext"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/editState"
+                app:layout_constraintHorizontal_bias="0.375"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editAddress" />
+                app:layout_constraintTop_toBottomOf="@+id/editAddress"
+                app:layout_constraintVertical_bias="0.038" />
 
             <EditText
                 android:id="@+id/editState"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="8dp"
-                android:ems="4"
+                android:layout_width="53dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
                 android:hint="State"
-                android:imeOptions="actionNext"
                 android:inputType="textCapCharacters"
                 android:maxLength="2"
-                android:minHeight="48dp"
-                app:layout_constraintStart_toEndOf="@id/editCity"
-                app:layout_constraintTop_toBottomOf="@+id/editAddress" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.598"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editAddress"
+                app:layout_constraintVertical_bias="0.038" />
 
             <EditText
                 android:id="@+id/editZipcode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="8dp"
-                android:ems="5"
+                android:layout_width="80dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
                 android:hint="Zipcode"
-                android:imeOptions="actionNext"
-                android:inputType="textCapCharacters"
+                android:inputType="number"
                 android:maxLength="5"
-                android:minHeight="48dp"
-                app:layout_constraintStart_toEndOf="@id/editState"
-                app:layout_constraintTop_toBottomOf="@+id/editAddress" />
-
-            <TextView
-                android:id="@+id/textHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:text="Home Phone:"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editCity" />
-
-            <EditText
-                android:id="@+id/editHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginTop="256dp"
-                android:ems="8"
-                android:imeOptions="actionNext"
-                android:inputType="textCapCharacters"
-                android:maxLength="5"
-                android:minHeight="48dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.098"
+                app:layout_constraintStart_toEndOf="@+id/editState"
+                app:layout_constraintTop_toBottomOf="@+id/editAddress"
+                app:layout_constraintVertical_bias="0.038" />
 
             <TextView
                 android:id="@+id/textCell"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="4dp"
+                android:text="Cell Phone:"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.623"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editState"
+                app:layout_constraintVertical_bias="0.082" />
+
+            <TextView
+                android:id="@+id/textHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="Phone No:"
-                app:layout_constraintStart_toEndOf="@id/editHome"
-                app:layout_constraintTop_toBottomOf="@+id/editCity" />
+                android:text="Home Phone:"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textCell"
+                app:layout_constraintHorizontal_bias="0.032"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editCity"
+                app:layout_constraintVertical_bias="0.014" />
 
             <EditText
                 android:id="@+id/editCell"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="256dp"
-                android:ems="8"
-                android:imeOptions="actionNext"
-                android:inputType="phone"
-                android:maxLength="14"
-                android:minHeight="48dp"
-                android:nextFocusDown="@id/editEmail"
-                app:layout_constraintStart_toStartOf="@id/textCell"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_width="162dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/editHome"
+                app:layout_constraintTop_toBottomOf="@+id/textCell"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <EditText
+                android:id="@+id/editHome"
+                android:layout_width="163dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="152dp"
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.009"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textHome"
+                app:layout_constraintVertical_bias="0.275" />
 
             <TextView
                 android:id="@+id/textEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:text="Email Address:"
+                android:text="E-Mail Address:"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.014"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editHome" />
+                app:layout_constraintTop_toBottomOf="@+id/editHome"
+                app:layout_constraintVertical_bias="0.1" />
 
             <EditText
                 android:id="@+id/editEmail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:ems="16"
-                android:imeOptions="actionNext"
-                android:inputType="textEmailAddress"
-                android:maxLength="14"
-                android:minHeight="48dp"
+                android:layout_width="329dp"
+                android:layout_height="48dp"
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.08"
+
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/textEmail" />
+                app:layout_constraintTop_toBottomOf="@+id/textEmail"
+                app:layout_constraintVertical_bias="0.16" />
 
             <TextView
-                android:id="@+id/textBday"
+                android:id="@+id/textBDay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
                 android:text="Birthday:"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.009"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+                app:layout_constraintTop_toBottomOf="@+id/editEmail"
+                app:layout_constraintVertical_bias="1.0" />
 
             <TextView
-                android:id="@+id/textDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="24dp"
+                android:id="@+id/textBirthday"
+                android:layout_width="80dp"
+                android:layout_height="23dp"
                 android:text="01/01/1970"
-                app:layout_constraintStart_toEndOf="@id/textBday"
-                app:layout_constraintTop_toBottomOf="@+id/editEmail" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.051"
+                android:inputType="text"
+                app:layout_constraintStart_toEndOf="@+id/textBDay"
+                app:layout_constraintTop_toBottomOf="@+id/editEmail"
+                app:layout_constraintVertical_bias="0.63" />
 
             <Button
-                android:id="@+id/btnBirthday"
+                android:id="@+id/buttonBirthday"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="60dp"
+                android:layout_marginTop="40dp"
                 android:text="Change"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBaseline_toBaselineOf="@id/textBday"/>
-
-            <TextView
-                android:id="@+id/textDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="24dp"
-                android:text="01/01/1970"
-                app:layout_constraintStart_toEndOf="@id/textBday"
-                app:layout_constraintTop_toBottomOf="@+id/editEmail"
-                tools:ignore="DuplicateIds" />
-
-
+                app:layout_constraintHorizontal_bias="0.777"
+                app:layout_constraintStart_toEndOf="@+id/textBDay"
+                app:layout_constraintTop_toBottomOf="@+id/editEmail" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
