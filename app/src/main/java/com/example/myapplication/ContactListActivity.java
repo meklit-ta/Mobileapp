@@ -107,6 +107,8 @@ public class ContactListActivity extends AppCompatActivity {
         initAddContactButton();
     }
 
+
+    @Override
     public void onResume(){
         super.onResume();
 

@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
         // Get contact ID from Intent
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            int contactId = extras.getInt("contactId", -1);
+            int contactId = extras.getInt("contactId",-1);
             if (contactId != -1) {
                 initContact(contactId);
             } else {
