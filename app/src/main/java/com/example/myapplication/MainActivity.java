@@ -1,15 +1,15 @@
 package com.example.myapplication;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -19,10 +19,12 @@ import android.widget.ToggleButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentManager;
 
-import java.util.Calendar;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements DatePickerDialog.SaveDateListener {
 
     private ToggleButton toggleEdit;
     private Button btnSave, buttonBirthday;
@@ -47,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         // Get contact ID from Intent
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            int contactId = extras.getInt("contactId",-1);
+            int contactId = extras.getInt("contactId", -1); // Default to -1 if missing
             if (contactId != -1) {
                 initContact(contactId);
             } else {
@@ -59,42 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize Toggle Button behavior
         initToggleButton();
-        setForEditing(false);
+        setForEditing(false); // Ensure editing is disabled by default
     }
-
-    private void initContact(int id) {
-        dataSource = new ContactDataSource(MainActivity.this);
-
-        try {
-            dataSource.open();
-            currentContact = dataSource.getSpecificContact(id);
-            dataSource.close();
-        } catch (Exception e) {
-            Toast.makeText(this, "Load Contact Failed", Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        if (currentContact == null) {
-            Toast.makeText(this, "No contact found with ID: " + id, Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        editContact.setText(currentContact.getContactName());
-        editAddress.setText(currentContact.getStreetAddress());
-        editCity.setText(currentContact.getCity());
-        editState.setText(currentContact.getState());
-        editZipcode.setText(currentContact.getZipCode());
-        editHome.setText(currentContact.getPhoneNumber());
-        editCell.setText(currentContact.getCellNumber());
-        editEmail.setText(currentContact.geteMail());
-
-        if (currentContact.getBirthday() != null) {
-            textBirthday.setText(DateFormat.format("MM/dd/yyyy", currentContact.getBirthday().getTime()));
-        } else {
-            textBirthday.setText("No Birthday");
-        }
-    }
-
     private void initToggleButton() {
         toggleEdit.setOnClickListener(v -> setForEditing(toggleEdit.isChecked()));
     }
@@ -128,66 +96,121 @@ public class MainActivity extends AppCompatActivity {
         btnSettings.setOnClickListener(v -> openSettings());
     }
 
-    private void initSaveButton() {
-    }
-
-
     private void openContacts() {
         Intent intent = new Intent(MainActivity.this, ContactListActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     private void openMap() {
         Intent intent = new Intent(MainActivity.this, ContactMapsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
     private void openSettings() {
         Intent intent = new Intent(MainActivity.this, ContactSettingsActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 
-    private void initChangeDateButton() {
-        buttonBirthday.setOnClickListener(v -> showDatePickerDialog());
+    @Override
+    public void didFinishDatePickerDialog(java.util.Calendar selectedTime) {
+        textBirthday.setText(DateFormat.format("MM/dd/yyyy", selectedTime));
+        currentContact.setBirthday(selectedTime);
     }
 
-    private void showDatePickerDialog() {
-        Calendar calendar = Calendar.getInstance();
-        DatePickerDialog datePickerDialog = new DatePickerDialog(
-                MainActivity.this,
-                (view, year, month, dayOfMonth) -> {
-                    Calendar selectedDate = Calendar.getInstance();
-                    selectedDate.set(year, month, dayOfMonth);
-                    textBirthday.setText(DateFormat.format("MM/dd/yyyy", selectedDate));
-                    currentContact.setBirthday(selectedDate);
-                },
-                calendar.get(Calendar.YEAR),
-                calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)
-        );
-        datePickerDialog.show();
+    private void initChangeDateButton() {
+        buttonBirthday.setOnClickListener(v -> {
+            FragmentManager fm = getSupportFragmentManager();
+            DatePickerDialog datePickerDialog = new DatePickerDialog();
+            datePickerDialog.show(fm, "DatePick");
+        });
     }
 
     private void initTextChangedEvents() {
-        editContact.addTextChangedListener(new SimpleTextWatcher() {
+        editContact.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                currentContact.setContactName(s.toString());
+                currentContact.setContactName(editContact.getText().toString());
             }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
 
-        editAddress.addTextChangedListener(new SimpleTextWatcher() {
+        editAddress.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                currentContact.setStreetAddress(s.toString());
+                currentContact.setStreetAddress(editAddress.getText().toString());
             }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
 
-        editEmail.addTextChangedListener(new SimpleTextWatcher() {
+        editCity.addTextChangedListener(new TextWatcher() {
             @Override
             public void afterTextChanged(Editable s) {
-                currentContact.seteMail(s.toString());
+                currentContact.setCity(editCity.getText().toString());
             }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
+
+        editState.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                currentContact.setState(editState.getText().toString());
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
+        editHome.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                currentContact.setPhoneNumber(editHome.getText().toString());
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
+
+        editCell.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                currentContact.setCellNumber(editCell.getText().toString());
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
+
+        editEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable s) {
+                currentContact.seteMail(editEmail.getText().toString());
+            }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {}
         });
     }
 
@@ -202,15 +225,97 @@ public class MainActivity extends AppCompatActivity {
         editEmail.setEnabled(enabled);
         buttonBirthday.setEnabled(enabled);
     }
+    /*
+        private void initSaveButton() {
+            dataSource = new ContactDataSource(MainActivity.this);
 
-    private abstract class SimpleTextWatcher implements TextWatcher {
-        @Override
-        public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            boolean wasSuccessful;
+            try {
+                dataSource.open();
+                if (currentContact.getContactID() == -1) {
+                    wasSuccessful = dataSource.insertContact(currentContact);
+                    if (wasSuccessful) {
+                        int newId = dataSource.getLastContactID();
+                        currentContact.setContactID(newId);
+                    }
+                } else {
+                    wasSuccessful = dataSource.updateContact(currentContact);
+                }
+                dataSource.close();
+            } catch (Exception e) {
+                wasSuccessful = false;
+                e.printStackTrace();
+            }
 
-        @Override
-        public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            if (wasSuccessful) {
+                toggleEdit.setChecked(false);
+                setForEditing(false);
+            }
+        }*/
+    private void initSaveButton() {
+        dataSource = new ContactDataSource(MainActivity.this);
 
-        @Override
-        public abstract void afterTextChanged(Editable s);
+        boolean wasSuccessful;
+        try {
+            dataSource.open();
+
+            Log.d("SAVE", "Saving Contact: " + currentContact.getContactName());
+            Log.d("SAVE", "Phone: " + currentContact.getPhoneNumber());
+            Log.d("SAVE", "Cell: " + currentContact.getCellNumber());
+            Log.d("SAVE", "Email: " + currentContact.geteMail());
+
+            if (currentContact.getContactID() == -1) {
+                wasSuccessful = dataSource.insertContact(currentContact);
+                if (wasSuccessful) {
+                    int newId = dataSource.getLastContactID();
+                    currentContact.setContactID(newId);
+                }
+            } else {
+                wasSuccessful = dataSource.updateContact(currentContact);
+            }
+            dataSource.close();
+        } catch (Exception e) {
+            wasSuccessful = false;
+            e.printStackTrace();
+        }
+
+        if (wasSuccessful) {
+            toggleEdit.setChecked(false);
+            setForEditing(false);
+        }
+    }
+
+
+    private void initContact(int id) {
+        dataSource = new ContactDataSource(MainActivity.this);
+
+        try {
+            dataSource.open();
+            currentContact = dataSource.getSpecificContact(id);
+            dataSource.close();
+        } catch (Exception e) {
+            Toast.makeText(this, "Load Contact Failed", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (currentContact == null) {
+            Toast.makeText(this, "No contact found with ID: " + id, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        editContact.setText(currentContact.getContactName());
+        editAddress.setText(currentContact.getStreetAddress());
+        editCity.setText(currentContact.getCity());
+        editState.setText(currentContact.getState());
+        editZipcode.setText(currentContact.getZipCode());
+        editHome.setText(currentContact.getPhoneNumber());
+        editCell.setText(currentContact.getCellNumber());
+        editEmail.setText(currentContact.geteMail());
+
+        if (currentContact.getBirthday() != null) {
+            textBirthday.setText(DateFormat.format("MM/dd/yyyy", currentContact.getBirthday().getTimeInMillis()).toString());
+        } else {
+            textBirthday.setText("No Birthday");
+        }
     }
 }

@@ -1,6 +1,5 @@
 package com.example.myapplication;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ public class ContactSettingsActivity extends AppCompatActivity {
     private RadioGroup radioGroupSortBy, RadioGroupSortOrder;
     private RadioButton radioName, radioCity, radioBirthday, radioAscending, radioDescending;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

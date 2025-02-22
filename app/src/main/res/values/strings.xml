@@ -1,6 +1,5 @@
-
 <resources>
-    <string name="app_name">MyProject</string>
+    <string name="app_name">MyApplication</string>
     <string name="a_button_to_display_a_list_of_contacts">Button to display a list of contacts</string>
     <string name="a_button_to_display_a_map_of_contact_s_address">Button to display a map of contact\'s address</string>
     <string name="a_button_to_display_settings_for_contacts">Button to display settings for contacts</string>
