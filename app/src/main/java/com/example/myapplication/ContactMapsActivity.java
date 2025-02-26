@@ -28,7 +28,7 @@ public class ContactMapsActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_contact_map);
 
-        // Initialize TextViews
+
         txtLatitude = findViewById(R.id.textLatitude);
         txtLongitude = findViewById(R.id.textLongitude);
         txtAccuracy = findViewById(R.id.textAccuracy);
@@ -44,10 +44,9 @@ public class ContactMapsActivity extends AppCompatActivity {
     }
 
     private void getGPSLocation() {
-        // Check for location permissions
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // Request permissions
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
             return;
         }
@@ -70,7 +69,6 @@ public class ContactMapsActivity extends AppCompatActivity {
                 public void onProviderDisabled(String provider) {}
             };
 
-            // Request GPS updates
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, gpsListener);
 
         } catch (Exception e) {
