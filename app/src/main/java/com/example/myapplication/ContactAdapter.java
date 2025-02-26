@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -54,6 +55,10 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         } else {
             Log.d("DEBUG", "Setting contact name for position: " + position);
             holder.textContactName.setText(contact.getContactName());
+
+            // Alternate colors: Even positions = Red, Odd positions = Blue
+            int colorResId = (position % 2 == 0) ? R.color.system_red : R.color.system_blue;
+            holder.textContactName.setTextColor(ContextCompat.getColor(parentContext, colorResId));
         }
 
         // Set phone number
