@@ -6,10 +6,158 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
-    android:fitsSystemWindows="true">
-    <!-- Toolbar with Toggle & Save Button -->
+    android:fitsSystemWindows="true"
+    tools:context=".ContactMapsActivity">
 
-    <!-- Contact Information Fields -->
+    <!-- Title -->
+    <TextView
+        android:id="@+id/titleText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Contact List"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <!-- Address Label -->
+    <TextView
+        android:id="@+id/addressLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address:"
+        app:layout_constraintTop_toBottomOf="@id/titleText"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Address Input -->
+    <EditText
+        android:id="@+id/addressInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="Enter Street Address"
+        app:layout_constraintTop_toBottomOf="@id/addressLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"/>
+
+    <!-- City, State, Zipcode Layout -->
+    <LinearLayout
+        android:id="@+id/locationDetailsLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/addressInput"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="16dp">
+
+        <EditText
+            android:id="@+id/cityInput"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="wrap_content"
+            android:hint="City"/>
+
+        <EditText
+            android:id="@+id/stateInput"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="State"/>
+
+        <EditText
+            android:id="@+id/zipcodeInput"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:hint="Zipcode"/>
+    </LinearLayout>
+
+    <!-- Get Coordinates Button -->
+    <Button
+        android:id="@+id/buttonGetLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GET COORDINATES"
+        app:layout_constraintTop_toBottomOf="@id/locationDetailsLayout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <!-- Latitude Display -->
+
+    <!-- Longitude Display -->
+
+    <TextView
+        android:id="@+id/latitudeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="Latitude:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonGetLocation" />
+
+    <TextView
+        android:id="@+id/textLatitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="None"
+        app:layout_constraintStart_toEndOf="@id/latitudeLabel"
+        app:layout_constraintTop_toBottomOf="@id/buttonGetLocation" />
+
+    <TextView
+        android:id="@+id/longitudeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="Longitude:"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textLatitude" />
+
+    <!-- Accuracy Display -->
+    <TextView
+        android:id="@+id/textLongitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:text="None"
+        app:layout_constraintStart_toEndOf="@id/longitudeLabel"
+        app:layout_constraintTop_toBottomOf="@id/textLatitude" />
+
+    <TextView
+        android:id="@+id/accuracyLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accuracy:"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/textLongitude"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Bottom Navigation Bar -->
+    <TextView
+        android:id="@+id/textAccuracy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:text="None"
+        app:layout_constraintStart_toEndOf="@id/accuracyLabel"
+        app:layout_constraintTop_toBottomOf="@id/textLongitude" />
 
     <LinearLayout
         android:id="@+id/bottomNavigationBar"
@@ -28,7 +176,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/white"
-            android:src="@drawable/contactlisticon" />
+            android:src="@drawable/contactlisticon"
+            android:scaleType="fitCenter"/>
 
         <ImageButton
             android:id="@+id/btnMap"
@@ -36,7 +185,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/white"
-            android:src="@drawable/mapicon" />
+            android:src="@drawable/mapicon"
+            android:scaleType="fitCenter"/>
 
         <ImageButton
             android:id="@+id/btnSettings"
@@ -44,9 +194,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/white"
-            android:src="@drawable/settingsicon" />
+            android:src="@drawable/settingsicon"
+            android:scaleType="fitCenter"/>
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
