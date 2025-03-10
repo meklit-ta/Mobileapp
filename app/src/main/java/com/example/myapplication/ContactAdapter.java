@@ -10,8 +10,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.core.content.ContextCompat;
 
 import java.util.ArrayList;
 
@@ -56,7 +56,6 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             Log.d("DEBUG", "Setting contact name for position: " + position);
             holder.textContactName.setText(contact.getContactName());
 
-            // Alternate colors: Even positions = Red, Odd positions = Blue
             int colorResId = (position % 2 == 0) ? R.color.system_red : R.color.system_blue;
             holder.textContactName.setTextColor(ContextCompat.getColor(parentContext, colorResId));
         }
@@ -68,6 +67,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             Log.d("DEBUG", "Setting phone number for position: " + position);
             holder.textPhoneNumber.setText(contact.getPhoneNumber());
         }
+        /*if (holder.textEmail == null) {
+            Log.e("ERROR", "getTextPhoneView() returned null at position: " + position);
+        } else {
+            Log.d("DEBUG", "Setting phone number for position: " + position);
+            holder.textEmail.setText(contact.geteMail());
+        }*/
 
         // Set click listener
         holder.itemView.setTag(holder);
@@ -80,6 +85,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         } else {
             holder.deleteButton.setVisibility(View.INVISIBLE);
         }
+
     }
 
     private void deleteItem(int position) {
@@ -111,12 +117,14 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     public static class ContactViewHolder extends RecyclerView.ViewHolder {
         public TextView textContactName;
         public TextView textPhoneNumber;
+        //public TextView textEmail;
         public Button deleteButton;
 
         public ContactViewHolder(@NonNull View itemView) {
             super(itemView);
             textContactName = itemView.findViewById(R.id.textContactName);
             textPhoneNumber = itemView.findViewById(R.id.textPhoneNumber);
+            //textEmail = itemView.findViewById(R.id.textEmail);
             deleteButton = itemView.findViewById(R.id.buttonDeleteContact);
 
             // Debugging logs
@@ -126,9 +134,12 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             if (textPhoneNumber == null) {
                 Log.e("ERROR", "TextView textPhoneNumber is NULL in ViewHolder");
             }
+           /* if (textEmail == null) {
+                Log.e("ERROR", "TextView textEmail is NULL in ViewHolder");
+            }
             if (deleteButton == null) {
                 Log.e("ERROR", "Button deleteButton is NULL in ViewHolder");
-            }
+            }*/
         }
     }
 }

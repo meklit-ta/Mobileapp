@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.graphics.Bitmap;
+
 import java.util.Calendar;
 
 public class Contact {
@@ -8,11 +10,21 @@ public class Contact {
     private String streetAddress;
     private String city;
     private String state;
-    private String zipCode;
+    private String zipcode;
     private String phoneNumber;
     private String cellNumber;
     private String eMail;
     private Calendar birthday;
+
+    public Bitmap getPicture() {
+        return p;
+    }
+
+    public void setPicture(Bitmap p) {
+        this.p = p;
+    }
+
+    private Bitmap p;
 
     public Contact() {
         contactID = -1;
@@ -59,11 +71,11 @@ public class Contact {
     }
 
     public String getZipCode() {
-        return zipCode;
+        return zipcode;
     }
 
-    public void setZipCode(String zipCode) {
-        this.zipCode = zipCode;
+    public void setZipCode(String zipcode) {
+        this.zipcode = zipcode;
     }
 
     public String getPhoneNumber() {

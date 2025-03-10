@@ -48,7 +48,7 @@ public class ContactSettingsActivity extends AppCompatActivity {
     }
 
     private void openMap() {
-        Intent intent = new Intent(ContactSettingsActivity.this, ContactMapsActivity.class);
+        Intent intent = new Intent(ContactSettingsActivity.this, ContactMapActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
