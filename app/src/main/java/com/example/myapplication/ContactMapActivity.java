@@ -85,7 +85,7 @@ public class ContactMapActivity extends AppCompatActivity implements OnMapReadyC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_contact_map);
+        setContentView(R.layout.activity_contact_map2);
 
         Bundle extras = getIntent().getExtras();
         try {
